@@ -32,38 +32,19 @@ export const Footer: React.FC<Props> = ({
       </span>
 
       <nav className="filter" data-cy="Filter">
-        <a
-          href="#/"
-          className={cn('filter__link', {
-            selected: filterType === FilterType.ALL,
-          })}
-          data-cy="FilterLinkAll"
-          onClick={() => onChangeType(FilterType.ALL)}
-        >
-          All
-        </a>
-
-        <a
-          href="#/active"
-          className={cn('filter__link', {
-            selected: filterType === FilterType.ACTIVE,
-          })}
-          data-cy="FilterLinkActive"
-          onClick={() => onChangeType(FilterType.ACTIVE)}
-        >
-          Active
-        </a>
-
-        <a
-          href="#/completed"
-          className={cn('filter__link', {
-            selected: filterType === FilterType.COMPLETED,
-          })}
-          data-cy="FilterLinkCompleted"
-          onClick={() => onChangeType(FilterType.COMPLETED)}
-        >
-          Completed
-        </a>
+        {Object.values(FilterType).map(type => (
+          <a
+            key={type}
+            href={`#/${type.toLowerCase()}`}
+            className={cn('filter__link', {
+              selected: filterType === type,
+            })}
+            data-cy={`FilterLink${type.charAt(0).toUpperCase()}${type.slice(1)}`}
+            onClick={() => onChangeType(type)}
+          >
+            {type.charAt(0).toUpperCase() + type.slice(1).toLowerCase()}
+          </a>
+        ))}
       </nav>
 
       <button

@@ -8,20 +8,9 @@ import { Todo, FilterType, ErrorType } from './types';
 
 import { UserWarning } from './UserWarning';
 
+import { getFilteredTodos } from './utils';
+
 import { Error, Header, TodoList, Footer } from './components';
-
-const getFilteredTodos = (todos: Todo[], filter: FilterType): Todo[] => {
-  const visibleTodos = [...todos];
-
-  switch (filter) {
-    case FilterType.ACTIVE:
-      return visibleTodos.filter(todo => !todo.completed);
-    case FilterType.COMPLETED:
-      return visibleTodos.filter(todo => todo.completed);
-    default:
-      return visibleTodos;
-  }
-};
 
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);

@@ -16,7 +16,7 @@ export const Footer: React.FC<Props> = ({
   onChangeType,
   onDelete,
 }) => {
-  const leftTodos = todos.filter(todo => !todo.completed).length;
+  const activeTodos = todos.filter(todo => !todo.completed).length;
   const completedTodos = todos.some(todo => todo.completed);
 
   function handleDeleteAllCompleted() {
@@ -28,7 +28,7 @@ export const Footer: React.FC<Props> = ({
   return (
     <footer className="todoapp__footer" data-cy="Footer">
       <span className="todo-count" data-cy="TodosCounter">
-        {leftTodos} items left
+        {activeTodos} items left
       </span>
 
       <nav className="filter" data-cy="Filter">

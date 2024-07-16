@@ -47,7 +47,7 @@ export const App: React.FC = () => {
         throw e;
       })
       .finally(() => {
-        setIsLoading(prev => prev.filter(id => id !== 0));
+        setIsLoading(prev => prev.filter(Boolean));
         setTempTodo(null);
         setIsSubmitting(false);
       });
@@ -58,7 +58,9 @@ export const App: React.FC = () => {
 
     return deleteTodo(todoId)
       .then(() => {
-        setTodos(currentTodos => currentTodos.filter(t => t.id !== todoId));
+        setTodos(currentTodos =>
+          currentTodos.filter(todo => todo.id !== todoId),
+        );
         setShouldFocusInput(true);
       })
       .catch(e => {
@@ -78,7 +80,7 @@ export const App: React.FC = () => {
       .then(todo => {
         setTodos(currentTodo => {
           const newTodo = [...currentTodo];
-          const index = newTodo.findIndex(curTodo => curTodo.id === todo.id);
+          const index = newTodo.findIndex(currTodo => currTodo.id === todo.id);
 
           newTodo.splice(index, 1, todo);
 
@@ -123,6 +125,7 @@ export const App: React.FC = () => {
           setShouldFocusInput={setShouldFocusInput}
           onUpdate={handleUpdateTodo}
         />
+
         <TodoList
           todos={filteredTodos}
           tempTodo={tempTodo}
@@ -131,7 +134,7 @@ export const App: React.FC = () => {
           onUpdate={handleUpdateTodo}
           onDelete={handleDeleteTodo}
         />
-        {/* Hide the footer if there are no todos */}
+
         {todos.length > 0 && (
           <Footer
             todos={todos}
@@ -142,8 +145,6 @@ export const App: React.FC = () => {
         )}
       </div>
 
-      {/* DON'T use conditional rendering to hide the notification */}
-      {/* Add the 'hidden' class to hide the message smoothly */}
       <Error error={error} setError={setError} />
     </div>
   );

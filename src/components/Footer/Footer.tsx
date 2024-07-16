@@ -1,7 +1,8 @@
 import React from 'react';
-import cn from 'classnames';
 
 import { Todo, FilterType } from '../../types';
+
+import { FilterLink } from '../FilterLink';
 
 interface Props {
   todos: Todo[];
@@ -16,7 +17,7 @@ export const Footer: React.FC<Props> = ({
   onChangeType,
   onDelete,
 }) => {
-  const activeTodos = todos.filter(todo => !todo.completed).length;
+  const activeTodosCount = todos.filter(todo => !todo.completed).length;
   const completedTodos = todos.some(todo => todo.completed);
 
   function handleDeleteAllCompleted() {
@@ -28,22 +29,17 @@ export const Footer: React.FC<Props> = ({
   return (
     <footer className="todoapp__footer" data-cy="Footer">
       <span className="todo-count" data-cy="TodosCounter">
-        {activeTodos} items left
+        {activeTodosCount} items left
       </span>
 
       <nav className="filter" data-cy="Filter">
         {Object.values(FilterType).map(type => (
-          <a
+          <FilterLink
             key={type}
-            href={`#/${type.toLowerCase()}`}
-            className={cn('filter__link', {
-              selected: filterType === type,
-            })}
-            data-cy={`FilterLink${type.charAt(0).toUpperCase()}${type.slice(1)}`}
-            onClick={() => onChangeType(type)}
-          >
-            {type.charAt(0).toUpperCase() + type.slice(1).toLowerCase()}
-          </a>
+            type={type}
+            filterType={filterType}
+            onChangeType={onChangeType}
+          />
         ))}
       </nav>
 

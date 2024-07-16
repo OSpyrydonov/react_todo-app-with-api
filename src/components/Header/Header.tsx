@@ -39,7 +39,7 @@ export const Header: React.FC<Props> = ({
 
     const trimmedTitle = title.trim();
 
-    if (trimmedTitle.length === 0) {
+    if (!trimmedTitle.length) {
       setError(ErrorType.EMPTY_TITLE);
       setTimeout(() => setError(''), 3000);
 
@@ -77,11 +77,11 @@ export const Header: React.FC<Props> = ({
   };
 
   const handleAllTodos = () => {
-    if (todos.every(todo => todo.completed === true)) {
+    if (todos.every(todo => todo.completed)) {
       return changeStatus(false);
     }
 
-    if (todos.some(todo => todo.completed === false)) {
+    if (todos.some(todo => !todo.completed)) {
       return changeStatus(true);
     }
   };

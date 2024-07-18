@@ -77,13 +77,9 @@ export const Header: React.FC<Props> = ({
   };
 
   const handleAllTodos = () => {
-    if (todos.every(todo => todo.completed)) {
-      return changeStatus(false);
-    }
+    const hasSomeActiveTodo = todos.some(todo => !todo.completed);
 
-    if (todos.some(todo => !todo.completed)) {
-      return changeStatus(true);
-    }
+    return changeStatus(hasSomeActiveTodo);
   };
 
   const completedTodos = todos.every(todo => todo.completed);

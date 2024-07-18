@@ -40,9 +40,9 @@ export const TodoItem: React.FC<Props> = ({
   };
 
   const handleEvent = (eventKey?: string) => {
-    const event = eventKey === undefined || eventKey === 'Enter';
+    const event = !eventKey || eventKey === 'Enter';
 
-    if (event && isEditingTodo && isEditingTodo.title.length) {
+    if (event && isEditingTodo?.title.length) {
       if (isEditingTodo.title.trim() !== todo.title) {
         handleTitleUpdate({ ...isEditingTodo, title: newTitle.trim() });
       } else {

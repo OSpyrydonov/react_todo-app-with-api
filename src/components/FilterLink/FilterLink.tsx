@@ -27,7 +27,7 @@ export const FilterLink: React.FC<FilterLinkProps> = ({
       data-cy={`FilterLink${type}`}
       onClick={handleClick}
     >
-      {type.charAt(0).toUpperCase() + type.slice(1).toLowerCase()}
+      {type}
     </a>
   );
 };

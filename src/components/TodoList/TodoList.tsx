@@ -47,12 +47,12 @@ export const TodoList: React.FC<Props> = ({
 
         {tempTodo && (
           <CSSTransition
-            key={tempTodo.id || uuidv4()}
+            key={uuidv4()}
             timeout={transitionTimeout}
             classNames="item"
           >
             <TodoItem
-              key={tempTodo.id || uuidv4()}
+              key={uuidv4()}
               todo={tempTodo}
               isLoading={isLoading.includes(0)}
               isSubmitting={isSubmitting}
